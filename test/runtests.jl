@@ -7,9 +7,10 @@ using NLPModels
 using LinearAlgebra, Logging, Test
 
 function tests()
-  methods = [coordinate_search, mads,
+  methods = [coordinate_search, coordinate_search_memo, mads,
              (nlp; kwargs...) -> nelder_mead(nlp, oriented_restart=true; kwargs...),
-             (nlp; kwargs...) -> nelder_mead(nlp, oriented_restart=false; kwargs...)]
+             (nlp; kwargs...) -> nelder_mead(nlp, oriented_restart=false; kwargs...),
+             nelder_mead_memo]
 
   @testset "Every method solves basic problems in multiple precisions" begin
     for mtd in methods
